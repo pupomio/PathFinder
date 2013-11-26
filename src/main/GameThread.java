@@ -63,40 +63,38 @@ public abstract class GameThread {
          * To remove the cap (will also increase running fps), replace Thread.sleep(10); with Thread.yield();
          */
         private static void render(final Canvas canvas, final BufferStrategy bs) {
-                new Thread() {
-                        @Override
-                        public void run() {
-                                Graphics2D g2d = null;
-                                try {
-                                        while (true) {
-                                                if (!PAUSE_RENDERING) {
-                                                        g2d = (Graphics2D) bs.getDrawGraphics();
-                                                        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                                                        
-                                                        // Fill the background.
-//                                                        g2d.setBackground(Color.WHITE);
-//                                                        g2d.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-                                                        
-                                                        g2d.drawImage(Global.BG, 0, 0, null);
-                                                        
-                                                        Global.SPRITE.draw(g2d);
-                                                        
-                                                        // Blit the back buffer to the screen.
-                                                    if(!bs.contentsLost())
-                                                            bs.show();
-                                                    
-                                                    // Cap at 100fps.
-                                                    Thread.sleep(10);
-                                                } else {
-                                                        Thread.sleep(100);
-                                                }
-                                        }
-                                } catch (Exception e) {
-                                        e.printStackTrace();
-                                } finally {
-                                        g2d.dispose();
-                                }
+            new Thread() {
+                @Override
+                public void run() {
+                    Graphics2D g2d = null;
+                    try {
+                        while (true) {
+                            if (!PAUSE_RENDERING) {
+                                g2d = (Graphics2D) bs.getDrawGraphics();
+                                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                                
+                                                            
+                                g2d.drawImage(Global.BG, 0, 0, null);
+                                if (Global.GRAPH != null)
+                                	Global.GRAPH.draw(g2d);
+                                Global.SPRITE.draw(g2d);
+                                    
+                                    // Blit the back buffer to the screen.
+                                if(!bs.contentsLost())
+                                        bs.show();
+                                
+                                // Cap at 100fps.
+                                Thread.sleep(10);
+                            } else {
+                                Thread.sleep(100);
+                            }
                         }
-                }.start();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    } finally {
+                        g2d.dispose();
+                    }
+                }
+            }.start();
         }
 }

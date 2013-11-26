@@ -34,27 +34,27 @@ public class Main extends JFrame {
      */
     public Main()
     {
-            // Setup.
-            setSize(800, 600);
-            setLocationRelativeTo(null);
-            setDefaultCloseOperation(EXIT_ON_CLOSE);
-            canvas.addMouseListener(new MouseController());
-            canvas.setIgnoreRepaint(true);
-            
-            Global.SPRITE = new Sprite(100, 300);
-            
-            // Add Components
-            add(canvas, BorderLayout.CENTER);
-            
-            // Finish
-            setVisible(true);
-            
-            // Set up buffer strategy.
-            canvas.createBufferStrategy(2);
-    bs = canvas.getBufferStrategy();
+        // Setup.
+        setSize(800, 600);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        canvas.addMouseListener(new MouseController());
+        canvas.setIgnoreRepaint(true);
+        
+        Global.SPRITE = new Sprite(100, 300);
+        
+        // Add Components
+        add(canvas, BorderLayout.CENTER);
+        
+        // Finish
+        setVisible(true);
+        
+        // Set up buffer strategy.
+        canvas.createBufferStrategy(2);
+        bs = canvas.getBufferStrategy();
     
-    // Start game threads.
-    GameThread.startGameThreads(canvas, bs);
+        // Start game threads.
+        GameThread.startGameThreads(canvas, bs);
     }
 
 }
