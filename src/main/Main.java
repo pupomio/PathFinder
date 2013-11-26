@@ -35,13 +35,13 @@ public class Main extends JFrame {
     public Main()
     {
         // Setup.
-        setSize(800, 600);
+        setSize(600, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         canvas.addMouseListener(new MouseController());
         canvas.setIgnoreRepaint(true);
         
-        Global.SPRITE = new Sprite(100, 300);
+        Global.SPRITE = new Sprite(100, 285);
         
         // Add Components
         add(canvas, BorderLayout.CENTER);
