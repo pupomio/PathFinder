@@ -28,12 +28,12 @@ public class Global {
 	}
 	private static void build_collision_graph() {
 		int[][] flagArray = new int[Global.BG.getWidth()][Global.BG.getHeight()];
-		for(int y = 0; y< Global.BG.getHeight()-NODE_SPACING; y+=NODE_SPACING) {
-			for (int x = 0; x < Global.BG.getWidth()-NODE_SPACING; x += NODE_SPACING) {
+		for(int y = 0; y+NODE_SPACING/2< Global.BG.getHeight(); y+=NODE_SPACING) {
+			for (int x = 0; x+NODE_SPACING/2 < Global.BG.getWidth(); x += NODE_SPACING) {
 				// Get the colour of the four corners and set the array flag accordingly
 				// Top left x,y
 				int impassable = 0;
-				int rgb = Global.BG.getRGB(x, y);
+				int rgb = Global.BG.getRGB(x+NODE_SPACING/2, y+NODE_SPACING/2);
 				if(rgb < -10000) {
 					impassable++;
 				}
