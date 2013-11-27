@@ -103,14 +103,20 @@ public class Graph {
 	}
 	
 	public void draw(Graphics2D g2d) {
+		//return;
+//		g2d.setColor(Color.BLUE);
+//		for (Node n : nodes) {
+//			g2d.setColor(n == current ? Color.YELLOW : Color.BLUE);
+//			g2d.fillArc(n.x, n.y, n.isVisited() ? 10 : 3,n.isVisited() ? 10 : 3, 0, 360);
+//		}
+//		g2d.setColor(Color.GREEN);
+//		for (Edge e : edges) {
+//			g2d.drawLine(e.a.x, e.a.y, e.b.x, e.b.y);
+//		}
 		g2d.setColor(Color.BLUE);
 		for (Node n : nodes) {
 			g2d.setColor(n == current ? Color.YELLOW : Color.BLUE);
-			g2d.fillArc(n.x, n.y, n.isVisited() ? 10 : 3,n.isVisited() ? 10 : 3, 0, 360);
-		}
-		g2d.setColor(Color.GREEN);
-		for (Edge e : edges) {
-			g2d.drawLine(e.a.x, e.a.y, e.b.x, e.b.y);
+			g2d.fillArc(n.x-1, n.y-1, n.isVisited() ? 10 : 3,n.isVisited() ? 10 : 3, 0, 360);
 		}
 		g2d.setColor(Color.BLACK);
 	}
@@ -173,6 +179,9 @@ public class Graph {
 		
 		current = ns[(int)start.getX()/Global.NODE_SPACING][(int) start.getY()/Global.NODE_SPACING];
 		int crow_flies = ((int) Math.sqrt(Math.pow(start.getX()-dest.x, 2)+Math.pow(dest.y-start.getY(), 2)));
+		while (current == null) {
+			current = ns[(int)start.getX()-1/Global.NODE_SPACING][(int) start.getY()-1/Global.NODE_SPACING];
+		}
 		current.f_score = crow_flies;
 		
 		current.g_score = 0;
@@ -197,7 +206,7 @@ public class Graph {
 				else {
 					neighbour = n.a;
 				}
-				neighbour.setVisited(true);
+				
 				int tent_g_score = current.g_score + 1;
 				int tent_f_score = (int) (tent_g_score + (Math.sqrt(Math.pow(neighbour.x - goal.x, 2)+Math.pow(neighbour.y - goal.y, 2))));
 				if (closed_set.contains(neighbour) && tent_f_score >= neighbour.f_score) {
@@ -226,7 +235,6 @@ public class Graph {
 			path.add(0,goal);
 			goal = came_from;
 			came_from = came_from.came_from;
-			System.out.println();
 		}
 		for (Node n : nodes) {
 			

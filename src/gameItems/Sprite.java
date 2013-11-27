@@ -56,6 +56,7 @@ public class Sprite {
          * Find path to given point and set bug path.
          */
         public void pathTo(Point p) {
+        		path.clear();
                path.addAll(PathFinder.intelligentPath(new Point2D.Double(x, y), p));
         }
 		public void draw(Graphics2D g2d) {
